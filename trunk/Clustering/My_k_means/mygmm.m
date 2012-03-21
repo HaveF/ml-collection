@@ -58,7 +58,7 @@ function varargout = mygmm(X, K_or_centroids)
         if L-Lprev < threshold
             break;
         end
-        Lprev = L;
+        Lprev = L
     end
  
     if nargout == 1
