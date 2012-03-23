@@ -142,7 +142,7 @@ for i = 1:maxFrame
     % Display the estimate position for every frame
     fig4 = figure;
     x2 = 2*positionOffset + videoWidth;y2 = screenHeight - 2*videoHeight - 2*positionOffset;
-    set(fig4, 'Name', 'Ball Estimated frame-by-frame', 'NumberTitle', 'off', 'Position', [x2 y2 videoWidth videoHeight])
+    set(fig4, 'Name', ['Ball Estimated frame-by-frame -' i], 'NumberTitle', 'off', 'Position', [x2 y2 videoWidth videoHeight])
     image(Id); colormap(gray(256));
    
 end
