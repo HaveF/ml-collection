@@ -12,8 +12,9 @@
 %           College of Information Engineering, Northwest A&F University  *                       
 %                                                                         *
 % =========================================================================
-
-M = aviread('.\test video\tabletennis');       
+videofile = '.\test video\tabletennis';
+videofile = '..\..\videos\living_room.avi';
+M = aviread(videofile);       
 [dontneed numberofframes] = size(M);     % numberofframes, number of frame
 Frames={M.cdata};                        % Frames, video data     
 
