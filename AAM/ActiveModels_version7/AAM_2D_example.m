@@ -88,7 +88,7 @@ for scale=1:options.nscales
             xtest = ShapeData.x_mean + ShapeData.Evectors(:,i)*sqrt(ShapeData.Evalues(i))*3;
             subplot(2,3,i), hold on;
             plot(xtest(end/2+1:end),xtest(1:end/2),'r.');
-            plot(ShapeData.x_mean(end/2+1:end),ShapeData.x_mean(1:end/2),'b.');
+            plot(ShapeData.x_mean(end/2+1:end),ShapeData.x_mean(1:end/2),'b.');clc
         end
     end
     
