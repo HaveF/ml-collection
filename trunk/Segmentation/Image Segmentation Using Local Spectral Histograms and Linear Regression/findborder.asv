@@ -1,0 +1,12 @@
+function result = findborder(A)
+    [N1,N2] = size(A);
+    result = zero(N1,N2);
+    for r=2:(N1-1)
+        for c = 2:(N2-1)
+            if A(r,c)~=A(r-1,c-1)|A(r,c)~=A(r-1,c)|A(r,c)~=A(r-1,c+1)...
+                    |A(r,c)~=A(r+1,c)|A(r,c)~=A(r+1,c+1)|A(r,c)~=A(r,c+1)
+                
+            end
+        end
+    end
+end

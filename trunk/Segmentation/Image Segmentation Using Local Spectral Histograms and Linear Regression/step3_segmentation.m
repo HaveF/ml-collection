@@ -1,10 +1,10 @@
 % Step 3: produce segmentation
 
-segn=5; % the number of segments 
+segn=4; % the number of segments 
 edgeThr=.5; % the threshold for removing edge features 
             % may need to adjust if the filterbank is changed
 
-dimn=segn;
+dimn=10;
 v1=fliplr(v);
 U1=v1(:,1:dimn);
 
@@ -104,8 +104,18 @@ B=(NcenInt'*NcenInt)^(-1)*NcenInt'*Y1;
 
 [m,slab]=max(B);
 
-finres=reshape(slab,N1,N2);
 
-figure,imshow(finres,[],'border','tight')
+
+finres=reshape(slab,N1,N2);
+result = findborder(finres);
+[idxx,idxy] = find(result>0);
+tempI=IMG;
+for ix = 1:length(idxx)
+   tempI(idxx(ix),idxy(ix),1)=255;
+   tempI(idxx(ix),idxy(ix),2:3)=0;
+end
+
+%figure,imshow(finres,[],'border','tight')
+figure,imshow(tempI,[],'border','tight')
 
 
