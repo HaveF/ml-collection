@@ -3,23 +3,30 @@
 clear
 close all
 
-bn=3; % the number of filters
+bn=5; % the number of filters
 
-I=imread('texturetest_resized.jpg');
+I=imread('3.png');
+IMG =I;
+%I = rgb2gray(I);
 %I=imread('fruit.jpg');
 
-[N1,N2]=size(I);
+[N1,N2,N3]=size(I);
 I=single(I);
 
 Ig=zeros(N1,N2,bn,'single');
 
 % the filterbank (adjust if necessary)
-Ig(:,:,1) = I;
+Ig(:,:,1:3) = I;
 h=fspecial('log',[5,5],.5);
-Ig(:,:,2) = imfilter(I,h,'symmetric');
+Ig(:,:,4) = imfilter(I(:,:,1),h,'symmetric');
 h=fspecial('log',[7,7],1);
-Ig(:,:,3) = imfilter(I,h,'symmetric');
-
+Ig(:,:,5) = imfilter(I(:,:,1),h,'symmetric');
+% XX = (1:N1)';
+% XXrep = repmat(XX,1,N2);
+% Ig(:,:,6) = XXrep;
+% XX = (1:N2);
+% XXrep = repmat(XX,N1,1);
+% Ig(:,:,7) = XXrep;
 % h=gabor_fn(3,pi/2);
 % Ig(:,:,4) = imfilter(I,h,'symmetric');
 % h=gabor_fn(3,0);
