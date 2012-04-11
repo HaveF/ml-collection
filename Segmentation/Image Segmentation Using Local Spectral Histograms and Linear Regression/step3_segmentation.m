@@ -1,7 +1,7 @@
 % Step 3: produce segmentation
 
-segn=4; % the number of segments 
-edgeThr=.5; % the threshold for removing edge features 
+segn=8; % the number of segments 
+edgeThr=0.45; % the threshold for removing edge features 
             % may need to adjust if the filterbank is changed
 
 dimn=10;
@@ -102,20 +102,22 @@ kmres(idx)=clab+1;
 
 B=(NcenInt'*NcenInt)^(-1)*NcenInt'*Y1;
 
+gamma_threshold = 1e-4;
+lambda_focuss = 1e-8;   % regularization parameter
+B = MFOCUSS(NcenInt, Y1, lambda_focuss,'prune_gamma',gamma_threshold);
+
 [m,slab]=max(B);
-
-
 
 finres=reshape(slab,N1,N2);
 result = findborder(finres);
 [idxx,idxy] = find(result>0);
 tempI=IMG;
 for ix = 1:length(idxx)
-   tempI(idxx(ix),idxy(ix),1)=255;
-   tempI(idxx(ix),idxy(ix),2:3)=0;
+   tempI(idxx(ix),idxy(ix),3)=255;
+   tempI(idxx(ix),idxy(ix),1:2)=0;
 end
 
 %figure,imshow(finres,[],'border','tight')
-figure,imshow(tempI,[],'border','tight')
+imshow(tempI,[],'border','tight')
 
 
