@@ -141,7 +141,7 @@ while (1)
 
     % ========= Check stopping conditions, etc. ========= 
     count = count + 1;
-    if (PRINT) disp(['iters: ',num2str(count),'   num coeffs: ',num2str(m), ...
+    if (PRINT&mod(count,100)==0) disp(['iters: ',num2str(count),'   num coeffs: ',num2str(m), ...
             '   gamma change: ',num2str(max(abs(gamma - gamma_old)))]); end;
     if (count >= MAX_ITERS) break;  end;
 
