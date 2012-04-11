@@ -3,38 +3,47 @@
 clear
 close all
 
-bn=5; % the number of filters
+bn=11; % the number of filters
 
-I=imread('3.png');
+I=imread('color.bmp');
 IMG =I;
 %I = rgb2gray(I);
 %I=imread('fruit.jpg');
-
+LAB = colorspace('LAB<-RGB',double(I));
 [N1,N2,N3]=size(I);
 I=single(I);
 
 Ig=zeros(N1,N2,bn,'single');
 
 % the filterbank (adjust if necessary)
-Ig(:,:,1:3) = I;
+Ig(:,:,1:3) = LAB;
+%Ig(:,:,12:14) = I;
 h=fspecial('log',[5,5],.5);
 Ig(:,:,4) = imfilter(I(:,:,1),h,'symmetric');
 h=fspecial('log',[7,7],1);
 Ig(:,:,5) = imfilter(I(:,:,1),h,'symmetric');
-% XX = (1:N1)';
-% XXrep = repmat(XX,1,N2);
-% Ig(:,:,6) = XXrep;
-% XX = (1:N2);
-% XXrep = repmat(XX,N1,1);
-% Ig(:,:,7) = XXrep;
-% h=gabor_fn(3,pi/2);
-% Ig(:,:,4) = imfilter(I,h,'symmetric');
-% h=gabor_fn(3,0);
-% Ig(:,:,5) = imfilter(I,h,'symmetric');
-% h=gabor_fn(3,pi/4);
-% Ig(:,:,6) = imfilter(I,h,'symmetric');
-% h=gabor_fn(3,-pi/4);
-% Ig(:,:,7) = imfilter(I,h,'symmetric');
+XX = (1:N1)';
+XXrep = repmat(XX,1,N2);
+Ig(:,:,6) = XXrep;
+XX = (1:N2);
+XXrep = repmat(XX,N1,1);
+Ig(:,:,7) = XXrep;
+h=gabor_fn(3,pi/2);
+Ig(:,:,8) = imfilter(I(:,:,1),h,'symmetric');
+h=gabor_fn(3,0);
+Ig(:,:,9) = imfilter(I(:,:,1),h,'symmetric');
+h=gabor_fn(3,pi/4);
+Ig(:,:,10) = imfilter(I(:,:,1),h,'symmetric');
+h=gabor_fn(3,-pi/4);
+Ig(:,:,11) = imfilter(I(:,:,1),h,'symmetric');
+% h=gabor_fn(3,3*pi/4);
+% Ig(:,:,12) = imfilter(I(:,:,1),h,'symmetric');
+% h=gabor_fn(3,-3*pi/4);
+% Ig(:,:,13) = imfilter(I(:,:,1),h,'symmetric');
+% h=gabor_fn(3,3*pi/2);
+% Ig(:,:,14) = imfilter(I(:,:,1),h,'symmetric');
+% h=gabor_fn(3,pi);
+% Ig(:,:,15) = imfilter(I(:,:,1),h,'symmetric');
 
 bb=11; % bin number
 
