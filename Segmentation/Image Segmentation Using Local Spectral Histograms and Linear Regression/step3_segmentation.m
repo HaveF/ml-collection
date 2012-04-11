@@ -1,10 +1,10 @@
 % Step 3: produce segmentation
 
 segn=8; % the number of segments 
-edgeThr=0.45; % the threshold for removing edge features 
+edgeThr=1.5; % the threshold for removing edge features 
             % may need to adjust if the filterbank is changed
 
-dimn=10;
+dimn=15;
 v1=fliplr(v);
 U1=v1(:,1:dimn);
 
