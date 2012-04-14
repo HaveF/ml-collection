@@ -1,16 +1,16 @@
 % Step 3: produce segmentation
 
-segn=8; % the number of segments 
+segn=12; % the number of segments 
 edgeThr=1.5; % the threshold for removing edge features 
             % may need to adjust if the filterbank is changed
 
-dimn=15;
+dimn=20;
 v1=fliplr(v);
 U1=v1(:,1:dimn);
 
 Y2=Y;
 Y1=(Y2'*U1)';
-
+%Y1 = f_cal_standardized_feature(Y1);
 intreg=zeros(N1,N2);
 for i=1+ws:N1-ws
     for j=1+ws:N2-ws
@@ -26,8 +26,8 @@ for i=1+ws:N1-ws
     end
 end 
 
-imshow(intreg,[])
-title('removing features on edges')
+figure,imshow(intreg,[])
+%title('removing features on edges')
 %pause
 idx=find(intreg==1);
 len=length(idx);
@@ -116,8 +116,9 @@ for ix = 1:length(idxx)
    tempI(idxx(ix),idxy(ix),3)=255;
    tempI(idxx(ix),idxy(ix),1:2)=0;
 end
-
+resultlabel = resign_region_label(finres);
 %figure,imshow(finres,[],'border','tight')
-imshow(tempI,[],'border','tight')
+figure,imshow(tempI,[],'border','tight')
+figure,imshow(uint8(resultlabel),[],'border','tight')
 
 
