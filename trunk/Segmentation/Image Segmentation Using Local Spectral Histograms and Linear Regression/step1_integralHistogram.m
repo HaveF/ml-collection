@@ -5,7 +5,7 @@ close all
 
 bn=5; % the number of filters
 
-I=imread('color_resized.bmp');
+I=imread('color.bmp');
 IMG =I;
 %I = rgb2gray(I);
 %I=imread('fruit.jpg');
@@ -55,7 +55,7 @@ Ig(:,:,5) = imfilter(I(:,:,1),h,'symmetric');
 % Ig(:,:,19) = imfilter(I(:,:,3),h,'symmetric');
 
 
-bb=10; % bin number
+bb=16; % bin number
 
 HImap2=zeros(bn*bb,N1,N2,'single');
 
