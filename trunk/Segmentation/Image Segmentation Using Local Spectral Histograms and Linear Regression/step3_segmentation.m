@@ -1,7 +1,7 @@
 % Step 3: produce segmentation
 
 segn=12; % the number of segments 
-edgeThr=1.5; % the threshold for removing edge features 
+edgeThr=1.15; % the threshold for removing edge features 
             % may need to adjust if the filterbank is changed
 
 dimn=20;
@@ -10,7 +10,7 @@ U1=v1(:,1:dimn);
 
 Y2=Y;
 Y1=(Y2'*U1)';
-%Y1 = f_cal_standardized_feature(Y1);
+%Y1 = f_cal_standardized_feature(Y1')';
 intreg=zeros(N1,N2);
 for i=1+ws:N1-ws
     for j=1+ws:N2-ws
@@ -20,6 +20,7 @@ for i=1+ws:N1-ws
         rt=U1'*sh_mx(:,i,j+ws);
 %         tmp=sum((up-bt).^2./(up+bt+eps))+sum((lf-rt).^2./(lf+rt+eps));
         tmp=sqrt(sum((up-bt).^2)+sum((lf-rt).^2));
+        %display(tmp);
         if tmp<edgeThr
             intreg(i,j)=1;
         end
@@ -102,21 +103,23 @@ kmres(idx)=clab+1;
 
 B=(NcenInt'*NcenInt)^(-1)*NcenInt'*Y1;
 
-gamma_threshold = 1e-4;
-lambda_focuss = 1e-8;   % regularization parameter
-B = MFOCUSS(NcenInt, Y1, lambda_focuss,'prune_gamma',gamma_threshold);
+% gamma_threshold = 1e-4;
+% lambda_focuss = 1e-8;   % regularization parameter
+% B = MFOCUSS(NcenInt, Y1, lambda_focuss,'prune_gamma',gamma_threshold);
 
 [m,slab]=max(B);
 
 finres=reshape(slab,N1,N2);
-result = findborder(finres);
+resultlabel = resign_region_label(finres);
+
+[result connect_matrix] = findborder(resultlabel);
 [idxx,idxy] = find(result>0);
 tempI=IMG;
 for ix = 1:length(idxx)
    tempI(idxx(ix),idxy(ix),3)=255;
    tempI(idxx(ix),idxy(ix),1:2)=0;
 end
-resultlabel = resign_region_label(finres);
+
 %figure,imshow(finres,[],'border','tight')
 figure,imshow(tempI,[],'border','tight')
 figure,imshow(uint8(resultlabel),[],'border','tight')

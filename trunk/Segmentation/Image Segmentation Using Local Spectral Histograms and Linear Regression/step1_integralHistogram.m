@@ -3,9 +3,9 @@
 clear
 close all
 
-bn=5; % the number of filters
+bn=7; % the number of filters
 
-I=imread('color.bmp');
+I=imread('6.jpg');
 IMG =I;
 %I = rgb2gray(I);
 %I=imread('fruit.jpg');
@@ -17,42 +17,47 @@ I=single(I);
 Ig=zeros(N1,N2,bn,'single');
 
 % the filterbank (adjust if necessary)
+%%  color info 3 %%%%
 Ig(:,:,1:3) = LAB;
+%% log 2 %%
 %Ig(:,:,12:14) = I;
 h=fspecial('log',[5,5],.5);
-Ig(:,:,4) = imfilter(I(:,:,1),h,'symmetric');
+Ig(:,:,end+1) = imfilter(I(:,:,1),h,'symmetric');
 h=fspecial('log',[7,7],1);
-Ig(:,:,5) = imfilter(I(:,:,1),h,'symmetric');
-% XX = (1:N1)';
-% XXrep = repmat(XX,1,N2);
-% Ig(:,:,6) = XXrep;
-% XX = (1:N2);
-% XXrep = repmat(XX,N1,1);
-% Ig(:,:,7) = XXrep;
+Ig(:,:,end+1) = imfilter(I(:,:,1),h,'symmetric');
+%% position 2 %%
+XX = (1:N1)';
+XXrep = repmat(XX,1,N2);
+Ig(:,:,end+1) = XXrep;
+XX = (1:N2);
+XXrep = repmat(XX,N1,1);
+Ig(:,:,end+1) = XXrep;
+% 
+% %% gabor 4 %%
 % h=gabor_fn(3,pi/2);
-% Ig(:,:,8) = imfilter(I(:,:,1),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,1),h,'symmetric');
 % h=gabor_fn(3,0);
-% Ig(:,:,9) = imfilter(I(:,:,1),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,1),h,'symmetric');
 % h=gabor_fn(3,pi/4);
-% Ig(:,:,10) = imfilter(I(:,:,1),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,1),h,'symmetric');
 % h=gabor_fn(3,-pi/4);
-% Ig(:,:,11) = imfilter(I(:,:,1),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,1),h,'symmetric');
 % h=gabor_fn(3,pi/2);
-% Ig(:,:,12) = imfilter(I(:,:,2),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,2),h,'symmetric');
 % h=gabor_fn(3,0);
-% Ig(:,:,13) = imfilter(I(:,:,2),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,2),h,'symmetric');
 % h=gabor_fn(3,pi/4);
-% Ig(:,:,14) = imfilter(I(:,:,2),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,2),h,'symmetric');
 % h=gabor_fn(3,-pi/4);
-% Ig(:,:,15) = imfilter(I(:,:,2),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,2),h,'symmetric');
 % h=gabor_fn(3,pi/2);
-% Ig(:,:,16) = imfilter(I(:,:,3),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,3),h,'symmetric');
 % h=gabor_fn(3,0);
-% Ig(:,:,17) = imfilter(I(:,:,3),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,3),h,'symmetric');
 % h=gabor_fn(3,pi/4);
-% Ig(:,:,18) = imfilter(I(:,:,3),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,3),h,'symmetric');
 % h=gabor_fn(3,-pi/4);
-% Ig(:,:,19) = imfilter(I(:,:,3),h,'symmetric');
+% Ig(:,:,end+1) = imfilter(I(:,:,3),h,'symmetric');
 
 
 bb=16; % bin number
