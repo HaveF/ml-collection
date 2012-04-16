@@ -1,6 +1,6 @@
 % Step 2: Compute the feature matrix. The plot shows the singular values. 
 
-ws=5; % integration scale. The actual value is 2*ws+1. 
+ws=9; % integration scale. The actual value is 2*ws+1. 
 
 sh_mx=zeros(bn*bb,N1,N2,'single');
 bs=1:bn*bb;
@@ -24,6 +24,8 @@ for i=1:N1
 end
 
 Y=reshape(sh_mx,bb*bn,N1*N2);
+% Y1 = f_cal_standardized_feature(Y')';
+% Y=Y1;
 S=Y*Y';
 [v,d]=eig(S);
 k=flipud(sqrt(diag(abs(d))));
